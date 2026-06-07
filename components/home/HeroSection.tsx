@@ -17,7 +17,7 @@ export default function HeroSection() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1920&q=85)",
+            "url(/images/porsche-911.jpg)",
         }}
       />
       {/* Gradient Overlays */}

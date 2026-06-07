@@ -48,7 +48,7 @@ export const CAR_BRANDS = [
   "Geely",
   "Lexus",
   "Mercedes-Benz",
-  "BMW",
+  "Porsche",
 ];
 
 export const CAR_STATUSES = [

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Easy Motors — автосалон в Алматы. Автомобили в наличии и под заказ. Кредит от 18%, оформление за 1 день. Toyota, Hyundai, Kia, BMW, Mercedes и др.",
+    "Easy Motors — автосалон в Алматы. Автомобили в наличии и под заказ. Кредит от 18%, оформление за 1 день. Toyota, Hyundai, Kia, Porsche, Mercedes и др.",
   keywords: [
     "автосалон Алматы",
     "купить машину Алматы",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "автомобили в наличии",
     "Toyota Camry Алматы",
     "Hyundai Tucson цена",
-    "купить BMW Алматы",
+    "купить Porsche Алматы",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
