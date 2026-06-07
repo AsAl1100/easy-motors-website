@@ -6,9 +6,20 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CarCard from "@/components/catalog/CarCard";
 import { DEMO_CARS } from "@/lib/data";
+import { useState, useEffect } from "react";
+import type { Car } from "@/types";
 
 export default function PopularCars() {
-  const featured = DEMO_CARS.filter((c) => c.is_featured).slice(0, 6);
+  const [featured, setFeatured] = useState<Car[]>(
+    DEMO_CARS.filter((c) => c.is_featured).slice(0, 6)
+  );
+
+  useEffect(() => {
+    fetch("/api/cars?featured=true")
+      .then((r) => r.json())
+      .then((d) => Array.isArray(d) && d.length && setFeatured(d.slice(0, 6)))
+      .catch(() => {});
+  }, []);
 
   return (
     <section className="py-24 bg-card/30">
