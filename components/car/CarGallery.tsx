@@ -36,7 +36,7 @@ export default function CarGallery({ images, alt }: Props) {
               src={images[activeIdx].url}
               alt={`${alt} — фото ${activeIdx + 1}`}
               fill
-              className="object-cover"
+              className="object-contain"
               sizes="(max-width: 768px) 100vw, 60vw"
               priority={activeIdx === 0}
             />
