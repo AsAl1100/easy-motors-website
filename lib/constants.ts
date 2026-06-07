@@ -38,16 +38,23 @@ export const TRANSMISSIONS = ["Автомат", "Механика", "Робот"
 export const DRIVE_TYPES = ["Передний", "Задний", "Полный (4WD)", "Полный (AWD)"];
 
 export const CAR_BRANDS = [
+  "Changan",
+  "BYD",
+  "Deepal",
+  "Chevrolet",
   "Toyota",
   "Hyundai",
   "Kia",
-  "Changan",
-  "Chevrolet",
   "Geely",
-  "BYD",
   "Lexus",
   "Mercedes-Benz",
   "BMW",
+];
+
+export const CAR_STATUSES = [
+  { value: "available", label: "В наличии" },
+  { value: "on_order", label: "Под заказ" },
+  { value: "sold", label: "Продано" },
 ];
 
 export const CREDIT_RATES = {

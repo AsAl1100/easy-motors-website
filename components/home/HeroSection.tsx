@@ -56,7 +56,7 @@ export default function HeroSection() {
             className="text-lg md:text-xl text-zinc-300 mb-10 leading-relaxed max-w-xl"
           >
             Подберём автомобиль под ваш бюджет, цель и стиль жизни.
-            Официальные дилеры. Честные цены. Быстрое оформление.
+            Честные цены. Быстрое оформление.
           </motion.p>
 
           <motion.div

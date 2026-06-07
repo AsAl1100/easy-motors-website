@@ -1,3 +1,5 @@
+export type CarStatus = "available" | "on_order" | "sold";
+
 export interface Car {
   id: string;
   slug: string;
@@ -12,8 +14,15 @@ export interface Car {
   engine_volume: number;
   engine_power: number;
   drive_type: string;
-  color: string;
+  color?: string;
   description: string;
+  status: CarStatus;
+  seats?: number;
+  trunk_volume?: number;
+  fuel_consumption?: number;
+  top_speed?: number;
+  acceleration?: number;
+  ground_clearance?: number;
   is_new: boolean;
   is_active: boolean;
   is_featured: boolean;

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Pencil, Trash2, Search } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,13 @@ import { useToast } from "@/components/ui/use-toast";
 import { formatPrice } from "@/lib/utils";
 import { DEMO_CARS } from "@/lib/data";
 import type { Car } from "@/types";
+
+type BadgeVariant = "green" | "yellow" | "destructive" | "outline" | "default" | "secondary" | "new";
+const STATUS_LABELS: Record<string, { label: string; variant: BadgeVariant }> = {
+  available: { label: "В наличии", variant: "green" },
+  on_order:  { label: "Под заказ", variant: "yellow" },
+  sold:      { label: "Продано",   variant: "destructive" },
+};
 
 export default function AdminCarsPage() {
   const { toast } = useToast();
@@ -39,6 +46,19 @@ export default function AdminCarsPage() {
     }
   };
 
+  const toggleActive = async (car: Car) => {
+    try {
+      await fetch(`/api/cars/${car.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ is_active: !car.is_active }),
+      });
+      setCars((cs) => cs.map((c) => c.id === car.id ? { ...c, is_active: !c.is_active } : c));
+    } catch {
+      toast({ variant: "destructive", title: "Ошибка" });
+    }
+  };
+
   return (
     <div className="p-8">
       <div className="flex items-center justify-between mb-6">
@@ -48,7 +68,7 @@ export default function AdminCarsPage() {
         </div>
         <Button asChild>
           <Link href="/admin/cars/new">
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 mr-1" />
             Добавить
           </Link>
         </Button>
@@ -68,28 +88,30 @@ export default function AdminCarsPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border">
+              <tr className="border-b border-border bg-secondary/30">
                 <th className="text-left px-4 py-3 text-muted-foreground font-medium">Фото</th>
                 <th className="text-left px-4 py-3 text-muted-foreground font-medium">Название</th>
                 <th className="text-left px-4 py-3 text-muted-foreground font-medium">Год</th>
                 <th className="text-left px-4 py-3 text-muted-foreground font-medium">Цена</th>
-                <th className="text-left px-4 py-3 text-muted-foreground font-medium">Статус</th>
+                <th className="text-left px-4 py-3 text-muted-foreground font-medium">Наличие</th>
+                <th className="text-left px-4 py-3 text-muted-foreground font-medium">Видимость</th>
                 <th className="text-right px-4 py-3 text-muted-foreground font-medium">Действия</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((car) => {
                 const img = car.images?.find((i) => i.is_main) ?? car.images?.[0];
+                const statusInfo = STATUS_LABELS[car.status ?? "available"] ?? STATUS_LABELS.available;
                 return (
-                  <tr key={car.id} className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors">
+                  <tr key={car.id} className="border-b border-border last:border-0 hover:bg-secondary/20 transition-colors">
                     <td className="px-4 py-3">
-                      <div className="w-14 h-10 rounded-md overflow-hidden bg-secondary">
+                      <div className="w-16 h-11 rounded-md overflow-hidden bg-secondary">
                         {img && (
                           <Image
                             src={img.url}
                             alt={car.model}
-                            width={56}
-                            height={40}
+                            width={64}
+                            height={44}
                             className="object-cover w-full h-full"
                           />
                         )}
@@ -101,12 +123,25 @@ export default function AdminCarsPage() {
                     <td className="px-4 py-3 text-muted-foreground">{car.year}</td>
                     <td className="px-4 py-3 font-semibold text-primary">{formatPrice(car.price)}</td>
                     <td className="px-4 py-3">
-                      <Badge variant={car.is_active ? "green" : "outline"}>
-                        {car.is_active ? "Активен" : "Скрыт"}
+                      <Badge variant={statusInfo.variant}>
+                        {statusInfo.label}
                       </Badge>
                     </td>
                     <td className="px-4 py-3">
-                      <div className="flex justify-end gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 px-2 text-xs gap-1"
+                        onClick={() => toggleActive(car)}
+                      >
+                        {car.is_active
+                          ? <><Eye className="w-3 h-3 text-green-500" /> Активен</>
+                          : <><EyeOff className="w-3 h-3 text-muted-foreground" /> Скрыт</>
+                        }
+                      </Button>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex justify-end gap-1">
                         <Button asChild variant="ghost" size="icon" className="h-8 w-8">
                           <Link href={`/admin/cars/${car.id}/edit`}>
                             <Pencil className="w-3.5 h-3.5" />

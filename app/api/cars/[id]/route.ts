@@ -31,17 +31,35 @@ export async function PUT(request: Request, { params }: Props) {
   const { id } = await params;
   try {
     const body = await request.json();
+    const { images, ...carData } = body;
+
     const { createClient } = await import("@/lib/supabase/server");
     const supabase = createClient();
 
     const { data, error } = await supabase
       .from("cars")
-      .update({ ...body, updated_at: new Date().toISOString() })
+      .update({ ...carData, updated_at: new Date().toISOString() })
       .eq("id", id)
       .select()
       .single();
 
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+
+    // Replace images if explicitly provided
+    if (Array.isArray(images)) {
+      await supabase.from("car_images").delete().eq("car_id", id);
+      if (images.length > 0) {
+        await supabase.from("car_images").insert(
+          images.map((img: { url: string; is_main: boolean; sort_order: number }) => ({
+            car_id: id,
+            url: img.url,
+            is_main: img.is_main,
+            sort_order: img.sort_order,
+          }))
+        );
+      }
+    }
+
     return NextResponse.json(data);
   } catch {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
