@@ -21,7 +21,7 @@ const STATUS_LABELS: Record<string, { label: string; variant: BadgeVariant }> = 
 
 export default function AdminCarsPage() {
   const { toast } = useToast();
-  const [cars, setCars] = useState<Car[]>(DEMO_CARS);
+  const [cars, setCars] = useState<Car[]>([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {

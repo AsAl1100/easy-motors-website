@@ -25,16 +25,10 @@ export async function GET(request: Request) {
     const { data, error } = await query.order("created_at", { ascending: false });
     if (!error && data) return NextResponse.json(data);
   } catch {
-    // Fall through to demo data
+    // Fall through
   }
 
-  let cars = DEMO_CARS;
-  if (brand) cars = cars.filter((c) => c.brand === brand);
-  if (body_type) cars = cars.filter((c) => c.body_type === body_type);
-  if (featured === "true") cars = cars.filter((c) => c.is_featured);
-  if (status) cars = cars.filter((c) => c.status === status);
-
-  return NextResponse.json(cars);
+  return NextResponse.json([]);
 }
 
 export async function POST(request: Request) {

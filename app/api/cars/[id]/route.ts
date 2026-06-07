@@ -22,9 +22,7 @@ export async function GET(_: Request, { params }: Props) {
     // Fall through
   }
 
-  const car = DEMO_CARS.find((c) => c.id === id || c.slug === id);
-  if (!car) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  return NextResponse.json(car);
+  return NextResponse.json({ error: "Not found" }, { status: 404 });
 }
 
 export async function PUT(request: Request, { params }: Props) {

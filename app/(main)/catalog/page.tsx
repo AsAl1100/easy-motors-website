@@ -11,7 +11,7 @@ import { DEMO_CARS } from "@/lib/data";
 import type { CatalogFilters as FiltersType, Car } from "@/types";
 
 export default function CatalogPage() {
-  const [allCars, setAllCars] = useState<Car[]>(DEMO_CARS);
+  const [allCars, setAllCars] = useState<Car[]>([]);
   const [filters, setFilters] = useState<FiltersType>({});
   const [showFilters, setShowFilters] = useState(false);
 

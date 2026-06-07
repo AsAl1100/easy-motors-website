@@ -10,9 +10,7 @@ import { useState, useEffect } from "react";
 import type { Car } from "@/types";
 
 export default function PopularCars() {
-  const [featured, setFeatured] = useState<Car[]>(
-    DEMO_CARS.filter((c) => c.is_featured).slice(0, 6)
-  );
+  const [featured, setFeatured] = useState<Car[]>([]);
 
   useEffect(() => {
     fetch("/api/cars?featured=true")

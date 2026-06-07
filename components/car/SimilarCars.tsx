@@ -1,19 +1,12 @@
-import { DEMO_CARS } from "@/lib/data";
 import CarCard from "@/components/catalog/CarCard";
 import type { Car } from "@/types";
 
 interface Props {
   currentCar: Car;
+  similar?: Car[];
 }
 
-export default function SimilarCars({ currentCar }: Props) {
-  const similar = DEMO_CARS.filter(
-    (c) =>
-      c.id !== currentCar.id &&
-      (c.brand === currentCar.brand || c.body_type === currentCar.body_type) &&
-      Math.abs(c.price - currentCar.price) < currentCar.price * 0.4
-  ).slice(0, 3);
-
+export default function SimilarCars({ currentCar, similar = [] }: Props) {
   if (!similar.length) return null;
 
   return (

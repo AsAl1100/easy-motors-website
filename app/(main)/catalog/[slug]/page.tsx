@@ -33,7 +33,7 @@ async function getCar(slug: string): Promise<Car | null> {
   } catch {
     // fall through
   }
-  return DEMO_CARS.find((c) => c.slug === slug) ?? null;
+  return null;
 }
 
 export async function generateStaticParams() {
@@ -45,7 +45,7 @@ export async function generateStaticParams() {
   } catch {
     // fall through
   }
-  return DEMO_CARS.map((car) => ({ slug: car.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
