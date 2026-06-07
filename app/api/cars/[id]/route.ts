@@ -29,7 +29,7 @@ export async function PUT(request: Request, { params }: Props) {
   const { id } = await params;
   try {
     const body = await request.json();
-    const { images, ...carData } = body;
+    const { images, id: _id, created_at: _ca, ...carData } = body;
 
     const { createClient } = await import("@/lib/supabase/server");
     const supabase = createClient();
