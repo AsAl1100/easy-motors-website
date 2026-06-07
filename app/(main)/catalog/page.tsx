@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { SlidersHorizontal, LayoutGrid, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,14 +8,22 @@ import CarCard from "@/components/catalog/CarCard";
 import CatalogFilters from "@/components/catalog/CatalogFilters";
 import SkeletonCard from "@/components/catalog/SkeletonCard";
 import { DEMO_CARS } from "@/lib/data";
-import type { CatalogFilters as FiltersType } from "@/types";
+import type { CatalogFilters as FiltersType, Car } from "@/types";
 
 export default function CatalogPage() {
+  const [allCars, setAllCars] = useState<Car[]>(DEMO_CARS);
   const [filters, setFilters] = useState<FiltersType>({});
   const [showFilters, setShowFilters] = useState(false);
 
+  useEffect(() => {
+    fetch("/api/cars")
+      .then((r) => r.json())
+      .then((d) => Array.isArray(d) && d.length && setAllCars(d))
+      .catch(() => {});
+  }, []);
+
   const filtered = useMemo(() => {
-    let cars = [...DEMO_CARS];
+    let cars = [...allCars];
 
     if (filters.brand) cars = cars.filter((c) => c.brand === filters.brand);
     if (filters.body_type) cars = cars.filter((c) => c.body_type === filters.body_type);
@@ -32,7 +40,7 @@ export default function CatalogPage() {
     else if (filters.sort === "year_asc") cars.sort((a, b) => a.year - b.year);
 
     return cars;
-  }, [filters]);
+  }, [filters, allCars]);
 
   return (
     <div className="pt-20 min-h-screen">

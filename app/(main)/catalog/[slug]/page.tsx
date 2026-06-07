@@ -12,18 +12,45 @@ import ApplicationForm from "@/components/forms/ApplicationForm";
 import { DEMO_CARS } from "@/lib/data";
 import { formatPrice, getCarWhatsAppMessage, getWhatsAppLink } from "@/lib/utils";
 import { WHATSAPP_PHONE, PHONE_NUMBER, SITE_NAME } from "@/lib/constants";
+import type { Car } from "@/types";
+
+export const dynamicParams = true;
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
+async function getCar(slug: string): Promise<Car | null> {
+  try {
+    const { createClient } = await import("@/lib/supabase/server");
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("cars")
+      .select("*, images:car_images(*)")
+      .eq("slug", slug)
+      .single();
+    if (!error && data) return data as Car;
+  } catch {
+    // fall through
+  }
+  return DEMO_CARS.find((c) => c.slug === slug) ?? null;
+}
+
 export async function generateStaticParams() {
+  try {
+    const { createClient } = await import("@/lib/supabase/server");
+    const supabase = createClient();
+    const { data } = await supabase.from("cars").select("slug");
+    if (data && data.length > 0) return data.map((c) => ({ slug: c.slug }));
+  } catch {
+    // fall through
+  }
   return DEMO_CARS.map((car) => ({ slug: car.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const car = DEMO_CARS.find((c) => c.slug === slug);
+  const car = await getCar(slug);
   if (!car) return {};
 
   const name = `${car.brand} ${car.model} ${car.year}`;
@@ -40,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CarPage({ params }: Props) {
   const { slug } = await params;
-  const car = DEMO_CARS.find((c) => c.slug === slug);
+  const car = await getCar(slug);
   if (!car) notFound();
 
   const displayName = `${car.brand} ${car.model} ${car.year}`;
