@@ -6,7 +6,6 @@ import { Calculator, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const benefits = [
-  "Первоначальный взнос от 10%",
   "Срок кредита до 7 лет",
   "Решение за 15 минут",
   "Без справок о доходах (по 2 документам)",
@@ -76,7 +75,7 @@ export default function CreditSection() {
                   { label: "Первый взнос", value: "2 300 000 ₸ (20%)" },
                   { label: "Сумма кредита", value: "9 200 000 ₸" },
                   { label: "Срок", value: "7 лет" },
-                  { label: "Ставка", value: "от 18% годовых" },
+                  { label: "Ставка", value: "от 21% годовых" },
                 ].map((row) => (
                   <div key={row.label} className="flex justify-between items-center py-2 border-b border-border last:border-0">
                     <span className="text-muted-foreground text-sm">{row.label}</span>
