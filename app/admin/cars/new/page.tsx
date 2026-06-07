@@ -45,6 +45,28 @@ const init: CarForm = {
   acceleration: "", ground_clearance: "", is_new: true, is_featured: false,
 };
 
+function TextField({ label, field, form, onChange, placeholder, type = "text" }: {
+  label: string;
+  field: keyof CarForm;
+  form: CarForm;
+  onChange: (k: keyof CarForm, v: string) => void;
+  placeholder?: string;
+  type?: string;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <Label>{label}</Label>
+      <Input
+        type={type}
+        placeholder={placeholder}
+        value={form[field] as string}
+        onChange={(e) => onChange(field, e.target.value)}
+        step={type === "number" ? "any" : undefined}
+      />
+    </div>
+  );
+}
+
 export default function NewCarPage() {
   const router = useRouter();
   const { toast } = useToast();
@@ -57,6 +79,8 @@ export default function NewCarPage() {
 
   const set = (k: keyof CarForm, v: string | boolean) =>
     setForm((f) => ({ ...f, [k]: v }));
+
+  const setStr = (k: keyof CarForm, v: string) => set(k, v);
 
   const addImageUrl = () => {
     const url = imageUrl.trim();
@@ -155,21 +179,6 @@ export default function NewCarPage() {
     }
   };
 
-  const TextField = ({ label, field, placeholder, type = "text" }: {
-    label: string; field: keyof CarForm; placeholder?: string; type?: string;
-  }) => (
-    <div className="space-y-1.5">
-      <Label>{label}</Label>
-      <Input
-        type={type}
-        placeholder={placeholder}
-        value={form[field] as string}
-        onChange={(e) => set(field, e.target.value)}
-        step={type === "number" ? "any" : undefined}
-      />
-    </div>
-  );
-
   return (
     <div className="p-6 max-w-4xl">
       <div className="flex items-center gap-3 mb-8">
@@ -196,11 +205,11 @@ export default function NewCarPage() {
                 </SelectContent>
               </Select>
             </div>
-            <TextField label="Модель *" field="model" placeholder="CS75 Plus" />
-            <TextField label="Год *" field="year" type="number" placeholder="2025" />
-            <TextField label="Цена (₸) *" field="price" type="number" placeholder="11000000" />
-            <TextField label="Пробег (км)" field="mileage" type="number" placeholder="0" />
-            <TextField label="Цвет" field="color" placeholder="Серый металлик" />
+            <TextField label="Модель *" field="model" form={form} onChange={setStr} placeholder="CS75 Plus" />
+            <TextField label="Год *" field="year" form={form} onChange={setStr} type="number" placeholder="2025" />
+            <TextField label="Цена (₸) *" field="price" form={form} onChange={setStr} type="number" placeholder="11000000" />
+            <TextField label="Пробег (км)" field="mileage" form={form} onChange={setStr} type="number" placeholder="0" />
+            <TextField label="Цвет" field="color" form={form} onChange={setStr} placeholder="Серый металлик" />
           </div>
 
           <div className="space-y-1.5">
@@ -236,14 +245,14 @@ export default function NewCarPage() {
                 </Select>
               </div>
             ))}
-            <TextField label="Объём двигателя (л)" field="engine_volume" type="number" placeholder="1.5" />
-            <TextField label="Мощность (л.с.)" field="engine_power" type="number" placeholder="150" />
-            <TextField label="Количество мест" field="seats" type="number" placeholder="5" />
-            <TextField label="Объём багажника (л)" field="trunk_volume" type="number" placeholder="450" />
-            <TextField label="Расход топлива (л/100км)" field="fuel_consumption" type="number" placeholder="7.5" />
-            <TextField label="Разгон 0–100 (сек)" field="acceleration" type="number" placeholder="9.5" />
-            <TextField label="Макс. скорость (км/ч)" field="top_speed" type="number" placeholder="190" />
-            <TextField label="Клиренс (мм)" field="ground_clearance" type="number" placeholder="185" />
+            <TextField label="Объём двигателя (л)" field="engine_volume" form={form} onChange={setStr} type="number" placeholder="1.5" />
+            <TextField label="Мощность (л.с.)" field="engine_power" form={form} onChange={setStr} type="number" placeholder="150" />
+            <TextField label="Количество мест" field="seats" form={form} onChange={setStr} type="number" placeholder="5" />
+            <TextField label="Объём багажника (л)" field="trunk_volume" form={form} onChange={setStr} type="number" placeholder="450" />
+            <TextField label="Расход топлива (л/100км)" field="fuel_consumption" form={form} onChange={setStr} type="number" placeholder="7.5" />
+            <TextField label="Разгон 0–100 (сек)" field="acceleration" form={form} onChange={setStr} type="number" placeholder="9.5" />
+            <TextField label="Макс. скорость (км/ч)" field="top_speed" form={form} onChange={setStr} type="number" placeholder="190" />
+            <TextField label="Клиренс (мм)" field="ground_clearance" form={form} onChange={setStr} type="number" placeholder="185" />
           </div>
         </div>
 
