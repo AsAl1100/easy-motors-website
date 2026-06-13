@@ -13,20 +13,20 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Автомобили в наличии и под заказ в Алматы`,
+    default: `${SITE_NAME} — Автомобили в наличии и под заказ в Астане`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Easy Motors — автосалон в Алматы. Автомобили в наличии и под заказ. Кредит от 18%, оформление за 1 день. Toyota, Hyundai, Kia, Porsche, Mercedes и др.",
+    "Easy Motors — автосалон в Астане. Автомобили в наличии и под заказ. Кредит от 21%, оформление за 1 день. Toyota, Hyundai, Kia, Porsche, Mercedes и др.",
   keywords: [
-    "автосалон Алматы",
-    "купить машину Алматы",
+    "автосалон Астана",
+    "купить машину Астана",
     "авто в кредит Казахстан",
     "Easy Motors",
     "автомобили в наличии",
-    "Toyota Camry Алматы",
+    "Toyota Camry Астана",
     "Hyundai Tucson цена",
-    "купить Porsche Алматы",
+    "купить Porsche Астана",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -37,21 +37,21 @@ export const metadata: Metadata = {
     locale: "ru_KZ",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Автомобили в наличии и под заказ в Алматы`,
+    title: `${SITE_NAME} — Автомобили в наличии и под заказ в Астане`,
     description:
-      "Easy Motors — автосалон в Алматы. Широкий выбор автомобилей, кредит от 18%, оформление за 1 день.",
+      "Easy Motors — автосалон в Астане. Широкий выбор автомобилей, кредит от 21%, оформление за 1 день.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} — Автосалон в Алматы`,
+        alt: `${SITE_NAME} — Автосалон в Астане`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Автомобили в Алматы`,
+    title: `${SITE_NAME} — Автомобили в Астане`,
     description: SITE_DESCRIPTION,
   },
   robots: {

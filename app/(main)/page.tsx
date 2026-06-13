@@ -11,7 +11,7 @@ import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} — Автомобили в наличии и под заказ в Казахстане`,
-  description: "Easy Motors — автосалон в Алматы. Широкий выбор автомобилей в наличии и под заказ. Кредит от 18%, оформление за 1 день.",
+  description: "Easy Motors — автосалон в Астане. Широкий выбор автомобилей в наличии и под заказ. Кредит от 21%, оформление за 1 день.",
 };
 
 export default function HomePage() {
