@@ -141,7 +141,7 @@ export default function ContactSection() {
               <div>
                 <p className="text-sm text-muted-foreground mb-2">Наш адрес</p>
                 <p className="text-xl font-bold">{COMPANY_ADDRESS}</p>
-                <p className="text-muted-foreground text-sm mt-2">г. Алматы, Казахстан</p>
+                <p className="text-muted-foreground text-sm mt-2">г. Астана, Казахстан</p>
               </div>
               {COMPANY_2GIS_URL !== "#" ? (
                 <a

@@ -148,7 +148,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} {SITE_NAME}. Все права защищены.</p>
-          <p>Казахстан, г. Алматы</p>
+          <p>Казахстан, г. Астана</p>
         </div>
       </div>
     </footer>
