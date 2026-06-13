@@ -6,7 +6,7 @@ import { Shield, Zap, CreditCard, Headphones, Star, TrendingDown } from "lucide-
 const advantages = [
   {
     icon: Shield,
-    title: "Официальная гарантия",
+    title: "Гарантия",
     description: "Все автомобили с заводской гарантией производителя и юридически чистой историей.",
   },
   {
