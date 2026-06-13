@@ -6,6 +6,7 @@ import { Calculator, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const benefits = [
+  "Первоначальный взнос от 0%",
   "Срок кредита до 7 лет",
   "Решение за 15 минут",
   "Без справок о доходах (по 2 документам)",

@@ -58,9 +58,9 @@ export const CAR_STATUSES = [
 ];
 
 export const CREDIT_RATES = {
-  min: 12,
+  min: 21,
   max: 28,
-  default: 18,
+  default: 21,
 };
 
 export const CREDIT_TERMS = [1, 2, 3, 4, 5, 6, 7];
