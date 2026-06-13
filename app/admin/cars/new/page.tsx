@@ -33,7 +33,7 @@ interface CarForm {
   status: string;
   seats: string; trunk_volume: string; fuel_consumption: string;
   top_speed: string; acceleration: string; ground_clearance: string;
-  is_new: boolean; is_featured: boolean;
+  is_new: boolean; is_featured: boolean; sort_order: string;
 }
 
 const init: CarForm = {
@@ -43,6 +43,7 @@ const init: CarForm = {
   color: "", description: "", status: "available",
   seats: "5", trunk_volume: "", fuel_consumption: "", top_speed: "",
   acceleration: "", ground_clearance: "", is_new: true, is_featured: false,
+  sort_order: "0",
 };
 
 function TextField({ label, field, form, onChange, placeholder, type = "text" }: {
@@ -156,6 +157,7 @@ export default function NewCarPage() {
         top_speed: parseInt(form.top_speed) || null,
         acceleration: parseFloat(form.acceleration) || null,
         ground_clearance: parseInt(form.ground_clearance) || null,
+        sort_order: parseInt(form.sort_order) || 0,
         images,
       };
 
@@ -210,6 +212,7 @@ export default function NewCarPage() {
             <TextField label="Цена (₸) *" field="price" form={form} onChange={setStr} type="number" placeholder="11000000" />
             <TextField label="Пробег (км)" field="mileage" form={form} onChange={setStr} type="number" placeholder="0" />
             <TextField label="Цвет" field="color" form={form} onChange={setStr} placeholder="Серый металлик" />
+            <TextField label="Порядок на сайте" field="sort_order" form={form} onChange={setStr} type="number" placeholder="0 = первый" />
           </div>
 
           <div className="space-y-1.5">

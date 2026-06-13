@@ -22,7 +22,7 @@ export async function GET(request: Request) {
     if (featured === "true") query = query.eq("is_featured", true);
     if (status) query = query.eq("status", status);
 
-    const { data, error } = await query.order("created_at", { ascending: false });
+    const { data, error } = await query.order("sort_order", { ascending: true }).order("created_at", { ascending: false });
     if (!error && data) return NextResponse.json(data);
   } catch {
     // Fall through

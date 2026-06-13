@@ -169,16 +169,16 @@ export default function EditCarPage() {
                 </SelectContent>
               </Select>
             </div>
-            {(["model", "year", "price", "mileage", "color"] as const).map((field) => (
+            {(["model", "year", "price", "mileage", "color", "sort_order"] as const).map((field) => (
               <div key={field} className="space-y-1.5">
                 <Label>
-                  {{ model: "Модель", year: "Год", price: "Цена (₸)", mileage: "Пробег (км)", color: "Цвет" }[field]}
+                  {{ model: "Модель", year: "Год", price: "Цена (₸)", mileage: "Пробег (км)", color: "Цвет", sort_order: "Порядок на сайте" }[field]}
                 </Label>
                 <Input
-                  type={["year","price","mileage"].includes(field) ? "number" : "text"}
+                  type={["year","price","mileage","sort_order"].includes(field) ? "number" : "text"}
                   value={(form[field] as string | number) ?? ""}
                   onChange={(e) =>
-                    set(field, ["year","price","mileage"].includes(field)
+                    set(field, ["year","price","mileage","sort_order"].includes(field)
                       ? parseFloat(e.target.value) || 0
                       : e.target.value)
                   }
