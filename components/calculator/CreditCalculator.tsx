@@ -26,7 +26,7 @@ export default function CreditCalculator({ initialPrice = 15000000, carName }: P
   const [price, setPrice] = useState(initialPrice);
   const [downPct, setDownPct] = useState(20);
   const [term, setTerm] = useState(5);
-  const [rate, setRate] = useState(18);
+  const [rate, setRate] = useState(21);
   const [monthly, setMonthly] = useState(0);
 
   const downPayment = Math.round((price * downPct) / 100);
@@ -80,14 +80,14 @@ export default function CreditCalculator({ initialPrice = 15000000, carName }: P
               </span>
             </div>
             <Slider
-              min={10}
+              min={0}
               max={90}
               step={5}
               value={[downPct]}
               onValueChange={([v]) => setDownPct(v)}
             />
             <div className="flex justify-between text-xs text-muted-foreground">
-              <span>10%</span>
+              <span>0%</span>
               <span>90%</span>
             </div>
           </div>
@@ -116,14 +116,14 @@ export default function CreditCalculator({ initialPrice = 15000000, carName }: P
               <span className="text-sm font-semibold text-primary">{rate}% годовых</span>
             </div>
             <Slider
-              min={12}
+              min={21}
               max={28}
               step={0.5}
               value={[rate]}
               onValueChange={([v]) => setRate(v)}
             />
             <div className="flex justify-between text-xs text-muted-foreground">
-              <span>12%</span>
+              <span>21%</span>
               <span>28%</span>
             </div>
           </div>
