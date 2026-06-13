@@ -26,6 +26,7 @@ export interface Car {
   is_new: boolean;
   is_active: boolean;
   is_featured: boolean;
+  sort_order?: number;
   created_at: string;
   updated_at: string;
   images?: CarImage[];
